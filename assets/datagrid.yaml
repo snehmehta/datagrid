@@ -1,0 +1,20 @@
+sourceType: remote
+sourcePath: https://us-central1-fir-apps-services.cloudfunctions.net/transactions
+titleColumnIndex: 0
+subTitleColumnIndex: 1
+config:
+  - label: Name
+    key: name
+    type: string
+  - label: Data
+    key: date
+    type: date
+  - label: Category
+    key: category
+    type: string
+  - label: Amount
+    key: amount
+    type: number
+  - label: Created
+    key: created_at
+    type: date
