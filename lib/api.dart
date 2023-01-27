@@ -12,7 +12,6 @@ class ApiClient {
 
   final Dio _dio = Dio(
     BaseOptions(
-      // baseUrl: kBaseUrl,
       receiveTimeout: 15000,
       connectTimeout: 15000,
       sendTimeout: 15000,

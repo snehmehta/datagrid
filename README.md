@@ -1,16 +1,38 @@
 # DataGrid
 
-Ensemble test to create configuratable datagrid view.
+## Run without hassle
+If you just want to see, play with the output, check [Zapp.run](https://zapp.run/edit/flutter-zk1w064ik1x0?entry=lib/main.dart&file=lib/main.dart)
+## Task
 
-## Getting Started
+To create YAML configurable responsive data grid widget.
 
-This project is a starting point for a Flutter application.
+## Sample YAML
 
-A few resources to get you started if this is your first Flutter project:
+```yaml
+sourceType: remote
+sourcePath: https://us-central1-fir-apps-services.cloudfunctions.net/transactions
+titleColumnIndex: 3
+subTitleColumnIndex: 4
+config:
+  - label: Name
+    key: name
+    type: string
+  - label: Data
+    key: date
+    type: date
+  - label: Category
+    key: category
+    type: string
+  - label: Amount
+    key: amount
+    type: number
+  - label: Created
+    key: created_at
+    type: date
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Output
+
+![Output](https://i.imgur.com/e6ve6E4.gif)
+

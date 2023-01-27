@@ -12,6 +12,10 @@ extension StringX on String {
 
     return false;
   }
+
+  String capitalize() {
+    return '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
+  }
 }
 
 extension ResponseExtension<T> on Response<T> {

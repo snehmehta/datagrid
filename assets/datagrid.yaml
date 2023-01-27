@@ -1,7 +1,7 @@
 sourceType: remote
 sourcePath: https://us-central1-fir-apps-services.cloudfunctions.net/transactions
-titleColumnIndex: 0
-subTitleColumnIndex: 1
+titleColumnIndex: 3
+subTitleColumnIndex: 4
 config:
   - label: Name
     key: name

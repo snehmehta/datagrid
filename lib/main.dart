@@ -1,14 +1,14 @@
 import 'package:datagrid/data_grid.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' as s;
+import 'package:flutter/services.dart';
 import 'package:yaml/yaml.dart';
 
-late dynamic dataGridSchema;
+late YamlMap dataGridSchema;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final data = await s.rootBundle.loadString('assets/datagrid.yaml');
-  dataGridSchema = loadYaml(data);
+  final data = await rootBundle.loadString('assets/datagrid.yaml');
+  dataGridSchema = loadYaml(data) as YamlMap;
 
   runApp(const MyApp());
 }
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter App',
+      title: 'Data Grid',
       theme: ThemeData(
         colorSchemeSeed: Colors.indigo,
         useMaterial3: true,
@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: DataGrid.fromYaml(data: dataGridSchema as YamlMap),
+        child: DataGrid.fromYaml(data: dataGridSchema),
       ),
     );
   }

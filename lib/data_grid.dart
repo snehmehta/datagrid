@@ -13,23 +13,15 @@ class DataGrid extends StatefulWidget {
     required this.sourcePath,
     this.titleColumnIndex = 0,
     this.subTitleColumnIndex = 1,
-  })  : assert(
-          titleColumnIndex < config.length &&
-              !(titleColumnIndex > config.length),
-          'Enter valid index number',
-        ),
-        assert(
-          titleColumnIndex != subTitleColumnIndex,
-          'TitleColumnIndex should not be equal to subTitleColumnIndex',
-        );
+  });
 
   DataGrid.fromYaml({super.key, required YamlMap data})
       : config = parseList<ColumnConfig>(
           data['config'],
           ColumnConfig.fromYaml,
         ),
-        titleColumnIndex = data['titleColumnIndex'] as int,
-        subTitleColumnIndex = data['subTitleColumnIndex'] as int,
+        titleColumnIndex = (data['titleColumnIndex'] as int?) ?? 0,
+        subTitleColumnIndex = (data['subTitleColumnIndex'] as int?) ?? 1,
         sourcePath = data['sourcePath'] as String,
         sourceType = (data['sourceType'] as String).convertSourceType;
 
@@ -92,12 +84,12 @@ class _DataGridState extends State<DataGrid> {
 
       final response = await api.get<dynamic>(widget.sourcePath);
       if (response.ok) {
+        // ignore: avoid_dynamic_calls
+        rawData = response.data['data'] as List;
+
         setState(() {
           state = DataGridState.loaded;
         });
-
-        // ignore: avoid_dynamic_calls
-        rawData = response.data['data'] as List;
       } else {
         throw Exception('Failed to Fetch Data from API');
       }
@@ -196,7 +188,9 @@ class _DataTable extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: SingleChildScrollView(
         child: DataTable(
-          columns: config.map((e) => DataColumn(label: Text(e.label))).toList(),
+          columns: config
+              .map((e) => DataColumn(label: Text(e.label.capitalize())))
+              .toList(),
           rows: rawData
               .map((row) {
                 return DataRow(
@@ -221,7 +215,8 @@ enum SourceType { local, remote }
 
 extension SourceTypeX on String {
   SourceType get convertSourceType {
-    return SourceType.values.firstWhere((element) => element.name == this);
+    return SourceType.values
+        .firstWhere((element) => element.name == toLowerCase());
   }
 }
 
